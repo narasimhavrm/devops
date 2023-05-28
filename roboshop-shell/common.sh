@@ -77,3 +77,18 @@ maven() {
   systemd_setup
 
 }
+
+golang() {
+  echo -e "${color} Install golang ${nocolor}"
+  yum install golang -y  &>>$log_file
+
+  app_presetup
+
+  echo -e "${color} Download golang Dependencies ${nocolor}"
+  go mod init dispatch
+  go get
+  go build  &>>$log_file
+
+  systemd_setup
+
+}
